@@ -1,0 +1,61 @@
+service: test
+
+plugins:
+  - serverless-offline
+  - serverless-bundle
+
+custom:
+  bundle:
+    sourcemaps: true
+    caching: false
+    stats: false
+    linting: false
+    forceExclude:
+      - _http_common
+    ignorePackages:
+      - pg-native
+    aliases:
+      - "typeorm": "./node_modules/typeorm/browser"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  create:
+    handler: handler.create
+    events:
+      - http:
+          path: /users
+          method: post
+          cors: true
+          request:
+            schema:
+              application/json: ${file(./src/schemas/createUser.json)}
+
+  get:
+    handler: handler.get
+    events:
+      - http:
+          path: /users
+          method: get
+          cors: true
+
+  update:
+    handler: handler.update
+    events:
+      - http:
+          path: /users
+          method: patch
+          cors: true
+          request:
+            schema:
+              application/json: ${file(./src/schemas/updateUser.json)}
+
+  remove:
+    handler: handler.remove
+    events:
+      - http:
+          path: /users
+          method: delete
+          cors: true

@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: Serverless TypeORM
+  description: Serverless TypeORM
+  version: 1.0.0
+servers:
+- url: http://localhost:3000/dev
+  description: Local Server
+tags:
+- name: User
+  description: User related API
+paths:
+  "/users":
+    post:
+      summary: Creates a new user.
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                phoneNumber:
+                  type: string
+      responses:
+        201:
+          description: Created
+    get:
+      tags:
+      - User
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          description: user id
+          schema:
+            type : string
+        - name: phoneNumber
+          in: query
+          required: false
+          description: users phone number
+          schema:
+            type : string
+      summary: get users
+      responses:
+        200:
+          description: Ok
+    patch:
+      tags:
+      - User
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          description: user id
+          schema:
+            type : string
+        - name: phoneNumber
+          in: query
+          required: false
+          description: users phone number
+          schema:
+            type : string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+      summary: update users
+      responses:
+        200:
+          description: Ok
+
+    delete:
+      tags:
+      - User
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          description: user id
+          schema:
+            type : string
+        - name: phoneNumber
+          in: query
+          required: false
+          description: users phone number
+          schema:
+            type : string
+      summary: delete users
+      responses:
+        200:
+          description: Ok
+definitions:
+  UserCreate:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - phoneNumber
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+  UserUpdate:
+    type: object
+    required:
+      - firstName
+      - lastName
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string

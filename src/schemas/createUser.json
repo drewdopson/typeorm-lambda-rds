@@ -1,0 +1,22 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Respond to user Request Schema",
+    "required": ["firstName", "lastName", "phoneNumber"],
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "title": "First name of the user."
+      },
+      "lastName": {
+        "type": "string",
+        "title": "last name of the user."
+      },
+      "phoneNumber": {
+        "type": "string",
+        "title": "Phone number of the user."
+      }
+    }
+  }
+  
